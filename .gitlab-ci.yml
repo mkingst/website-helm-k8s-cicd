@@ -4,7 +4,7 @@ stages:
 
 variables:
   IMAGE_NAME: mkingst-gitlab.ddns.net:5050/mkingst/website-helm-k8s-cicd
-  DOCKER_HOST: "tcp://mkingst-gitlab.ddns.net:5050"
+  DOCKER_HOST: "https://mkingst-gitlab.ddns.net:5050"
 
 build:
   stage: build
