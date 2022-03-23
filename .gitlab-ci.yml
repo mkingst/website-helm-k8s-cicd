@@ -3,8 +3,8 @@ stages:
   - deploy
 
 variables:
-  IMAGE_NAME: registry.gitlab.com/nextlink/gitlab-presentation/sample-helm-cicd-demo
-  DOCKER_HOST: tcp://localhost:2375/
+  IMAGE_NAME: mkingst-gitlab.ddns.net:5050/mkingst/website-helm-k8s-cicd
+  DOCKER_HOST: mkingst-gitlab.ddns.net:5050
 
 build:
   stage: build
@@ -12,7 +12,7 @@ build:
   services:
     - docker:18-dind
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker login -u mkingst -p $CI_JOB_TOKEN $DOCKER_HOST
     - docker build -f Dockerfile --tag ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA} .
     - docker push ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}
 
@@ -20,4 +20,4 @@ deploy:
   stage: deploy
   image: alpine/helm:3.5.4
   script:
-    - helm upgrade sample-helm-cicd-demo ./deploy --install --set-string image.tag=${CI_COMMIT_SHORT_SHA} --namespace sample-helm-cicd-demo --timeout 30m0s
+    - helm upgrade website-helm-k8s-cicd ./deploy --install --set-string image.tag=${CI_COMMIT_SHORT_SHA} --namespace website-helm-k8s-cicd --timeout 5m0s
