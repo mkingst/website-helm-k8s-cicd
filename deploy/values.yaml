@@ -1,0 +1,17 @@
+replicaCount: 1
+
+application:
+  name: website-helm-k8s-cicd
+  port: 80
+
+image:
+  repository: mkingst-gitlab.ddns.net:5050/mkingst/website-helm-k8s-cicd
+  tag: latest
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
