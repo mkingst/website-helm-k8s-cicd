@@ -24,10 +24,11 @@ test:
     - docker:18.09-dind
   script:
     - apk add curl
-    - docker run -d -p 80:80 $CI_REGISTRY_IMAGE:${CI_COMMIT_SHORT_SHA} 
-    - wait 10
-    - docker info
-    - curl http://localhost:80
+    - docker run -d --name tester -p 8000:80 $CI_REGISTRY_IMAGE:${CI_COMMIT_SHORT_SHA} 
+    - CONTAINER_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAdress}}{{end}}' tester)
+    - sleep 15
+    - curl $CONTAINER_IP:8000
+    - docker rm -f tester
 
 deploy:
   stage: deploy
