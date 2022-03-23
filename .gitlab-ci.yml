@@ -1,7 +1,6 @@
 stages:
   - build
   - deploy
-cache: "%CI_PIPELINE_ID%"
 variables:
   DOCKER_HOST: "tcp://localhost:2375"
 
