@@ -4,7 +4,7 @@ stages:
 
 variables:
   IMAGE_NAME: mkingst-gitlab.ddns.net:5050/mkingst/website-helm-k8s-cicd
-  DOCKER_HOST: https://mkingst-gitlab.ddns.net:5050
+  DOCKER_HOST: mkingst-gitlab.ddns.net:5050
 
 build:
   stage: build
@@ -12,7 +12,7 @@ build:
   services:
     - docker:18-dind
   script:
-    - docker login -u mkingst -p $CI_JOB_TOKEN $DOCKER_HOST
+    - docker login -u mkingst -p $CI_JOB_TOKEN mkingst-gitlab.ddns.net:5050
     - docker build -f Dockerfile --tag ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA} .
     - docker push ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}
 
