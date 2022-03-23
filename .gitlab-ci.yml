@@ -13,6 +13,7 @@ build:
     - docker:18-dind
   script:
    # - docker login -u mkingst -p $CI_JOB_TOKEN $DOCKER_HOST
+    - echo $CI_REGISTRY_IMAGE
     - docker login -u mkingst -p ChangeMe "https://mkingst-gitlab.ddns.net:5050"
     - docker build -f Dockerfile --tag ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA} .
     - docker push ${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}
