@@ -24,8 +24,10 @@ test:
     - docker:18.09-dind
   script:
     - apk add curl
-    - docker run -d -p 80:80 $CI_REGISTRY_IMAGE:${CI_COMMIT_SHORT_SHA} && wait 10
-    - curl http://localhost
+    - docker run -d -p 80:80 $CI_REGISTRY_IMAGE:${CI_COMMIT_SHORT_SHA} 
+    - wait 10
+    - docker info
+    - curl http://localhost:80
 
 deploy:
   stage: deploy
