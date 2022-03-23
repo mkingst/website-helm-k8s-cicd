@@ -1,7 +1,7 @@
 stages:
   - build
   - deploy
-cache: ${CI_COMMIT_SHORT_SHA}
+cache: "%CI_PIPELINE_ID%"
 variables:
   DOCKER_HOST: "tcp://localhost:2375"
 
