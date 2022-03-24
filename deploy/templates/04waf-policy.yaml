@@ -8,5 +8,5 @@ spec:
     apPolicy: "default/nginx-policy"
     securityLog:
       enable: true
-      apLogConf: "default/logconf"
+      apLogConf: "website-helm-k8s-cicd/logconf"
       logDest: "syslog:server=10.105.238.128:5144"
