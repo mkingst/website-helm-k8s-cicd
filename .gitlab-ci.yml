@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - deploy
+  - remove
 
 variables:
   DOCKER_HOST: "tcp://localhost:2375"
@@ -35,3 +36,11 @@ deploy:
   image: alpine/helm:3.5.4
   script:
     - helm upgrade website-helm-k8s-cicd ./deploy --install --set-string image.tag=${CI_COMMIT_SHORT_SHA} --namespace website-helm-k8s-cicd --create-namespace --timeout 5m0s
+
+remove:
+  stage: remove
+  when: manual
+  image: alpine/helm:3.5.4
+  script:
+    - helm uninstall website-helm-k8s-cicd --namespace website-helm-k8s-cicd
+
