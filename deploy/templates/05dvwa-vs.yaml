@@ -43,6 +43,7 @@ spec:
   host: dvwa.example.com
   policies:
   - name: waf-policy
+    namespace: website-helm-k8s-cicd
   upstreams:
   - name: dvwa 
     service: dvwa
