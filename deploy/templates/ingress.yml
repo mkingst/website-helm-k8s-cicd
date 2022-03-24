@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.application.name }}
   namespace: {{ .Values.application.name }}
 spec:
+  ingressClassName: nginx
   rules:
     - host: micheal.example.com
       http:
